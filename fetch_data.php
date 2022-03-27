@@ -1,7 +1,7 @@
 <?php include('db_conn.php');
 
 $output= array();
-$sql = "SELECT candidate_id,candidate_fullname,candidate_dob,candidate_age,candidate_gender,candidate_address,phnum,candidate_email FROM candidate_information ";
+$sql = "SELECT candidate_id, employee_id, candidate_fullname,candidate_dob,candidate_age,candidate_gender,candidate_address,phnum,candidate_email FROM candidate_information ";
 
 $totalQuery = mysqli_query($conn,$sql);
 $total_all_rows = mysqli_num_rows($totalQuery);
@@ -34,7 +34,7 @@ if(isset($_POST['order']))
 }
 else
 {
-	$sql .= " ORDER BY candidate_id desc";
+	$sql .= " ORDER BY candidate_id";
 }
 
 if($_POST['length'] != -1)
@@ -58,7 +58,12 @@ while($row = mysqli_fetch_assoc($query))
 	$sub_array[] = $row['candidate_address'];
 	$sub_array[] = $row['phnum'];
 	$sub_array[] = $row['candidate_email'];
-	$sub_array[] = '<a href="javascript:void();" data-id="'.$row['candidate_id'].'"  class="btn btn-info btn-sm editbtn" >Edit</a> <a href="javascript:void();" data-id="'.$row['candidate_id'].'"  class="btn btn-success btn-sm acptbtn" >Accept</a> <a href="javascript:void();" data-id="'.$row['candidate_id'].'"  class="btn btn-danger btn-sm deleteBtn" >Delete</a>';
+	if($row["employee_id"]){
+		$sub_array[] = '<a href="#" class="btn btn-info btn-sm disabled">Edit</a> <a href="#" class="btn btn-success btn-sm disabled">Accept</a> <a href="candidate_delete.php?del='.$row['candidate_id'].'" class="btn btn-danger btn-sm deleteBtn">Delete</a>';
+	}
+	else{
+		$sub_array[] = '<a href="#" data-id="'.$row['candidate_id'].'"  class="btn btn-info btn-sm editbtn">Edit</a> <a href="emp_info.php?acc='.$row['candidate_id'].'" class="btn btn-success btn-sm acptbtn">Accept</a> <a href="candidate_delete.php?del='.$row['candidate_id'].'" class="btn btn-danger btn-sm deleteBtn">Delete</a>';
+	}
 	$data[] = $sub_array;
 }
 

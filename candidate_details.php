@@ -103,98 +103,6 @@ require_once('check_login.php');
                         </div>
                     </div>
 
-                    <!-- Modal -->
-                    <!-- <div class="modal fade" id="modal_insert" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Candidate form: </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="container p-5 my-2 border">
-                                        <h2>Enter your details here:</h2><br>
-                                        <form name="candidate_info" action="candidate_insert.php" method="POST">
-
-                                            <div class="form-group">
-                                                <label for="fullname" class="form-label">Full Name: </label>
-                                                <input type="text" class="form-control" id="fname" name="fullname" required>
-                                            </div>
-                                            <br>
-
-                                            <div class="form-inline">
-                                                <label for="dob" class="form-label">Date of Birth: </label>
-                                                <div class="col-sm-2">
-                                                    <input type="date" class="form-control" id="dob" name="dateofbirth" required>
-                                                </div>
-                                            </div>
-                                            <br>
-
-                                            <div class="form-check">
-                                                <label for="gender" class="form-label">Gender: </label>
-                                                <div class="form-check">
-                                                    <input type="radio" class="form-check-input" id="gender" name="gender" value="Male" checked>Male
-                                                    <label class="form-check-label" for="radio1"></label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="radio" class="form-check-input" id="gender" name="gender" value="Female">Female
-                                                    <label class="form-check-label" for="radio1"></label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="radio" class="form-check-input" id="gender" name="gender" value="Others">Others
-                                                    <label class="form-check-label" for="radio1"></label>
-                                                </div>
-                                            </div>
-                                            <br>
-
-                                            <div class="form-group">
-                                                <label for="address" class="form-label">Address: </label>
-                                                <textarea type="text" class="form-control" rows="5" cols="33" id="address" name="address" required></textarea>
-                                            </div>
-                                            <br>
-
-                                            <div class="form-group">
-                                                <label for="email" class="form-label">Email address: </label>
-                                                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
-                                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                                            </div>
-                                            <br>
-
-                                            <div class="form-group">
-                                                <label for="phnum" class="form-label">Phone number: (+91) </label>
-                                                <input type="tel" class="form-control" id="phnum" name="phnumber" maxlength="10" pattern="[1-9]{1}[0-9]{9}" title="Please enter a valid 10 digits contact number" required>
-                                            </div>
-                                            <br>
-
-                                            <div class="form-inline">
-                                                <label for="workexp" class="form-label">Experience (in years): </label>
-                                                <div class="col-sm-2">
-                                                    <input type="number" class="form-control" id="workexp" name="workexperience" required>
-                                                </div>
-                                            </div>
-                                            <br>
-
-                                            <div class="form-group">
-                                                <label for="qualif" class="form-label">Qualifications: </label>
-                                                <input type="text" class="form-control" id="qualif" name="qualifications" required>
-                                            </div>
-                                            <br>
-
-                                            <button type="submit" class="btn btn-primary" style="float: right;">Submit</button>
-
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- /.Modal -->
-
                 </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->
@@ -280,52 +188,6 @@ require_once('check_login.php');
             });
         */
 
-        /* update user js script
-            $(document).on('submit', '#updateUser', function(e) {
-              e.preventDefault();
-              //var tr = $(this).closest('tr');
-              var city = $('#cityField').val();
-              var username = $('#nameField').val();
-              var mobile = $('#mobileField').val();
-              var email = $('#emailField').val();
-              var trid = $('#trid').val();
-              var id = $('#id').val();
-              if (city != '' && username != '' && mobile != '' && email != '') {
-                $.ajax({
-                  url: "update_user.php",
-                  type: "post",
-                  data: {
-                    city: city,
-                    username: username,
-                    mobile: mobile,
-                    email: email,
-                    id: id
-                  },
-                  success: function(data) {
-                    var json = JSON.parse(data);
-                    var status = json.status;
-                    if (status == 'true') {
-                      table = $('#example').DataTable();
-                      // table.cell(parseInt(trid) - 1,0).data(id);
-                      // table.cell(parseInt(trid) - 1,1).data(username);
-                      // table.cell(parseInt(trid) - 1,2).data(email);
-                      // table.cell(parseInt(trid) - 1,3).data(mobile);
-                      // table.cell(parseInt(trid) - 1,4).data(city);
-                      var button = '<td><a href="javascript:void();" data-id="' + id + '" class="btn btn-info btn-sm editbtn">Edit</a>  <a href="#!"  data-id="' + id + '"  class="btn btn-danger btn-sm deleteBtn">Delete</a></td>';
-                      var row = table.row("[id='" + trid + "']");
-                      row.row("[id='" + trid + "']").data([id, username, email, mobile, city, button]);
-                      $('#exampleModal').modal('hide');
-                    } else {
-                      alert('failed');
-                    }
-                  }
-                });
-              } else {
-                alert('Fill all the required fields');
-              }
-            });
-        */
-
         //edit button js script
         $('#example').on('click', '.editbtn ', function(event) {
             var table = $('#example').DataTable();
@@ -335,14 +197,14 @@ require_once('check_login.php');
 
 
             $.ajax({
-                url: "test.php",
+                url: "candidate_upd.php",
                 data: {
                     cand_id: candidate_id
                 },
                 type: 'post',
                 success: function(data) {
                     var json = JSON.parse(data);
-                    console.log(json);
+                    //console.log(json);
                     $('#fname_upd').val(json.candidate_fullname);
                     $('#dob_upd').val(json.candidate_dob);
 
@@ -352,17 +214,17 @@ require_once('check_login.php');
                         $('#gender_upd.female').prop('checked', true);
                     else
                         $('#gender_upd.others').prop('checked', true);
-                        
+
                     $('#address_upd').val(json.candidate_address);
                     $('#phnum_upd').val(json.phnum);
                     $('#email_upd').val(json.candidate_email);
                     $('#workexp_upd').val(json.experience_in_years);
                     $('#qualif_upd').val(json.qualifications_file_location);
-                    $('#cid').val(trid);
+                    $('#cid').val(candidate_id);
                     $('#cand_upd').modal('show');
                 },
                 error: function() {
-                    alert('error');
+                    alert('error updating record');
                 }
             })
         });
@@ -404,6 +266,97 @@ require_once('check_login.php');
             */
     </script>
     <!-- /.scripts -->
+
+    <!-- Candidate Insert Modal -->
+    <div class="modal fade" id="modal_insert" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Candidate form: </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container p-5 my-2 border">
+                        <h2>Enter your details here:</h2><br>
+                        <form name="candidate_info" action="candidate_insert.php" method="POST">
+
+                            <div class="form-group">
+                                <label for="fullname" class="form-label">Full Name: </label>
+                                <input type="text" class="form-control" id="fname" name="fullname" required>
+                            </div>
+                            <br>
+
+                            <div class="form-inline">
+                                <label for="dob" class="form-label">Date of Birth: </label>
+                                <div class="col-sm-2">
+                                    <input type="date" class="form-control" id="dob" name="dateofbirth" required>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="form-check">
+                                <label for="gender" class="form-label">Gender: </label>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="gender" name="gender" value="Male" checked>Male
+                                    <label class="form-check-label" for="radio1"></label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="gender" name="gender" value="Female">Female
+                                    <label class="form-check-label" for="radio1"></label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="gender" name="gender" value="Others">Others
+                                    <label class="form-check-label" for="radio1"></label>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="address" class="form-label">Address: </label>
+                                <textarea type="text" class="form-control" rows="5" cols="33" id="address" name="address" required></textarea>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email address: </label>
+                                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="phnum" class="form-label">Phone number: (+91) </label>
+                                <input type="tel" class="form-control" id="phnum" name="phnumber" maxlength="10" pattern="[1-9]{1}[0-9]{9}" title="Please enter a valid 10 digits contact number" required>
+                            </div>
+                            <br>
+
+                            <div class="form-inline">
+                                <label for="workexp" class="form-label">Experience (in years): </label>
+                                <div class="col-sm-2">
+                                    <input type="number" class="form-control" id="workexp" name="workexperience" required>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="qualif" class="form-label">Qualifications: </label>
+                                <input type="text" class="form-control" id="qualif" name="qualifications" required>
+                            </div>
+                            <br>
+
+                            <button type="submit" class="btn btn-primary" style="float: right;">Submit</button>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.Modal -->
 
     <!-- modal update -->
     <div class="modal fade" id="cand_upd" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
