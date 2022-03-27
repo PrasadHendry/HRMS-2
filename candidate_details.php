@@ -332,7 +332,7 @@ require_once('check_login.php');
             var trid = $(this).closest('tr').attr('id');
             // console.log(selectedRow);
             var candidate_id = $(this).data('id');
-            
+
 
             $.ajax({
                 url: "test.php",
@@ -342,14 +342,22 @@ require_once('check_login.php');
                 type: 'post',
                 success: function(data) {
                     var json = JSON.parse(data);
-                    $('#fname_upd').val(json.username);
-                    $('#dob_upd').val(json.dob);
-                    $('#gender_upd').val(json.gender);
-                    $('#address_upd').val(json.addr);
-                    $('#phnum_upd').val(json.mobile);
-                    $('#email_upd').val(json.email);
-                    $('#workexp_upd').val(json.workexp);
-                    $('#qualif_upd').val(json.qualif);
+                    console.log(json);
+                    $('#fname_upd').val(json.candidate_fullname);
+                    $('#dob_upd').val(json.candidate_dob);
+
+                    if (json.candidate_gender == 'Male')
+                        $('#gender_upd.male').prop('checked', true);
+                    else if (json.candidate_gender == 'Female')
+                        $('#gender_upd.female').prop('checked', true);
+                    else
+                        $('#gender_upd.others').prop('checked', true);
+                        
+                    $('#address_upd').val(json.candidate_address);
+                    $('#phnum_upd').val(json.phnum);
+                    $('#email_upd').val(json.candidate_email);
+                    $('#workexp_upd').val(json.experience_in_years);
+                    $('#qualif_upd').val(json.qualifications_file_location);
                     $('#cid').val(trid);
                     $('#cand_upd').modal('show');
                 },
@@ -429,15 +437,15 @@ require_once('check_login.php');
                             <div class="form-check">
                                 <label for="gender_upd" class="form-label">Gender: </label>
                                 <div class="form-check">
-                                    <input type="radio" class="form-check-input" id="gender_upd" name="gender_upd" value="Male">Male
+                                    <input type="radio" class="form-check-input male" id="gender_upd" name="gender_upd" value="Male">Male
                                     <label class="form-check-label" for="gender_upd"></label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="radio" class="form-check-input" id="gender_upd" name="gender_upd" value="Female">Female
+                                    <input type="radio" class="form-check-input female" id="gender_upd" name="gender_upd" value="Female">Female
                                     <label class="form-check-label" for="gender_upd"></label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="radio" class="form-check-input" id="gender_upd" name="gender_upd" value="Others">Others
+                                    <input type="radio" class="form-check-input others" id="gender_upd" name="gender_upd" value="Others">Others
                                     <label class="form-check-label" for="gender_upd"></label>
                                 </div>
                             </div>
