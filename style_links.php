@@ -7,6 +7,10 @@
   <link href="plugins/fontawesome-free/css/brands.css" rel="stylesheet">
   <link href="plugins/fontawesome-free/css/solid.css" rel="stylesheet">
   <link href="plugins/fontawesome-free/css/v5-font-face.css" rel="stylesheet" />
+  <!-- DataTables -->
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Select2 -->
   <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
