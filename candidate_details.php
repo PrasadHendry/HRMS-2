@@ -72,57 +72,39 @@ require_once('check_login.php');
                         <h2>Candidate Details:</h2>
                     </div>
                     <br>
-                    <?php
-
-                    // fetching candidate data from db
-                    $result = $conn->query("SELECT * FROM candidate_information");
-
-                    if ($result->num_rows > 0) {
-                        // displaying header for table view
-                        echo "<table style='text-align:center; background-color:white;' class='table table-bordered'>" . "<tr><th>" . "Candidate ID" . "</th><th>" . "Full name" . "</th><th>" . "Date of Birth" . "</th><th>" . "Age" . "</th><th>" . "Gender" . "</th><th>" . "Address" . "</th><th>" . "Contact number" . "</th><th>" . "E-mail" . "</th><th colspan = '3'>" . "Actions" . "</th></tr>";
-
-                        // displaying data from db
-                        while ($row = $result->fetch_assoc()) {
-                            $candidate_phone = $row["phnum"];
-                            $candidate_email = $row["candidate_email"];
-                            echo "<tr><td>" . $row["candidate_id"] . "</td><td id = 'fname_td'>" . $row["candidate_fullname"] . "</td><td id = 'dob_td'>" . $row["candidate_dob"] . "</td><td id = 'age_td'>" . $row["candidate_age"] . "</td><td id = 'gender_td'>" . $row["candidate_gender"] . "</td><td id = 'address_td'>" . $row["candidate_address"] . "</td><td id = 'phnum_td'> <a href='tel:$candidate_phone' class='hyperlinked_phones'>$candidate_phone</a></td><td id = 'email_td'><a href='mailto:$candidate_email' class='hyperlinked_emails'>$candidate_email</a></td>";
-                    ?>
-                            <td><a href="candidate_delete.php?del=<?php echo $row["candidate_id"]; ?>"><button type="submit" class="btn btn-danger">Delete</button></td>
-                            <?php
-                            // different button styles based on whether candidate was already accepted or not
-                            if ($row["employee_id"]) {
-                                echo "<td><button type='submit' class='btn btn-warning' disabled>Cannot update</button></td>";
-                                echo "<td><button type='submit' class='btn btn-secondary' disabled>Accepted</button></td></tr>";
-                            } else {
-                            ?>
-                                <td><button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#modal_update<?php echo $row["candidate_id"]; ?>">Update</button></td>
-                                <td><a href='emp_info.php?acc=<?php echo $row["candidate_id"]; ?>'><button type='submit' class='btn btn-success'>Accept</button></td>
-                                </tr>
-                    <?php
-                            }
-                            include 'candidate_upd.php';
-                        }
-                        echo "</table>";
-                    } else {
-                        echo " <div class='empty-state'>
-                       <div class='empty-state__content'>
-                       <div class='empty-state__icon'>
-                       <i class='fa-solid fa-id-card'></i>
-                       </div>
-                       <div class='empty-state__message'>No Candidate data</div>
-                       <div class='empty-state__help'><span class='badge badge-secondary'>Tip</span>
-                       Add Candidates by clicking Add New.
-                       </div>
-                       </div>
-                       </div>";
-                    }
-
-                    // closing connection
-                    $conn->close();
-                    ?>
+                    <div class="row">
+                        <div class="container">
+                            <!-- add user button
+        <div class="btnAdd">
+          <a href="#!" data-id="" data-bs-toggle="modal" data-bs-target="#addUserModal" class="btn btn-success btn-sm">Add User</a>
+        </div>
+        -->
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <table id="example" class="table">
+                                        <thead>
+                                            <th>Candidate Id</th>
+                                            <th>Full Name</th>
+                                            <th>Date of Birth</th>
+                                            <th>Age</th>
+                                            <th>Gender</th>
+                                            <th>Address</th>
+                                            <th>Contact Number</th>
+                                            <th>Email</th>
+                                            <th>Options</th>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="modal_insert" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <!-- <div class="modal fade" id="modal_insert" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -210,7 +192,8 @@ require_once('check_login.php');
                                 </div>
                             </div>
                         </div>
-                    </div><!-- /.Modal -->
+                    </div> -->
+                    <!-- /.Modal -->
 
                 </div><!-- /.container-fluid -->
             </section>
@@ -235,7 +218,272 @@ require_once('check_login.php');
 
     <!-- scripts -->
     <?php include 'scripts.php'; ?>
+    <script src="js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/dt-1.10.25datatables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "fnCreatedRow": function(nRow, aData, iDataIndex) {
+                    $(nRow).attr('candidate_id', aData[0]);
+                },
+                'serverSide': 'true',
+                'processing': 'true',
+                'paging': 'true',
+                'order': [],
+                'ajax': {
+                    'url': 'fetch_data.php',
+                    'type': 'post',
+                },
+                "aoColumnDefs": [{
+                        "bSortable": false,
+                        "aTargets": [8]
+                    },
+
+                ]
+            });
+        });
+
+        /* add user js script
+            $(document).on('submit', '#addUser', function(e) {
+              e.preventDefault();
+              var city = $('#addCityField').val();
+              var username = $('#addUserField').val();
+              var mobile = $('#addMobileField').val();
+              var email = $('#addEmailField').val();
+              if (city != '' && username != '' && mobile != '' && email != '') {
+                $.ajax({
+                  url: "add_user.php",
+                  type: "post",
+                  data: {
+                    city: city,
+                    username: username,
+                    mobile: mobile,
+                    email: email
+                  },
+                  success: function(data) {
+                    var json = JSON.parse(data);
+                    var status = json.status;
+                    if (status == 'true') {
+                      mytable = $('#example').DataTable();
+                      mytable.draw();
+                      $('#addUserModal').modal('hide');
+                    } else {
+                      alert('failed');
+                    }
+                  }
+                });
+              } else {
+                alert('Fill all the required fields');
+              }
+            });
+        */
+
+        /* update user js script
+            $(document).on('submit', '#updateUser', function(e) {
+              e.preventDefault();
+              //var tr = $(this).closest('tr');
+              var city = $('#cityField').val();
+              var username = $('#nameField').val();
+              var mobile = $('#mobileField').val();
+              var email = $('#emailField').val();
+              var trid = $('#trid').val();
+              var id = $('#id').val();
+              if (city != '' && username != '' && mobile != '' && email != '') {
+                $.ajax({
+                  url: "update_user.php",
+                  type: "post",
+                  data: {
+                    city: city,
+                    username: username,
+                    mobile: mobile,
+                    email: email,
+                    id: id
+                  },
+                  success: function(data) {
+                    var json = JSON.parse(data);
+                    var status = json.status;
+                    if (status == 'true') {
+                      table = $('#example').DataTable();
+                      // table.cell(parseInt(trid) - 1,0).data(id);
+                      // table.cell(parseInt(trid) - 1,1).data(username);
+                      // table.cell(parseInt(trid) - 1,2).data(email);
+                      // table.cell(parseInt(trid) - 1,3).data(mobile);
+                      // table.cell(parseInt(trid) - 1,4).data(city);
+                      var button = '<td><a href="javascript:void();" data-id="' + id + '" class="btn btn-info btn-sm editbtn">Edit</a>  <a href="#!"  data-id="' + id + '"  class="btn btn-danger btn-sm deleteBtn">Delete</a></td>';
+                      var row = table.row("[id='" + trid + "']");
+                      row.row("[id='" + trid + "']").data([id, username, email, mobile, city, button]);
+                      $('#exampleModal').modal('hide');
+                    } else {
+                      alert('failed');
+                    }
+                  }
+                });
+              } else {
+                alert('Fill all the required fields');
+              }
+            });
+        */
+
+        //edit button js script
+        $('#example').on('click', '.editbtn ', function(event) {
+            var table = $('#example').DataTable();
+            var trid = $(this).closest('tr').attr('id');
+            // console.log(selectedRow);
+            var candidate_id = $(this).data('id');
+            
+
+            $.ajax({
+                url: "test.php",
+                data: {
+                    cand_id: candidate_id
+                },
+                type: 'post',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    $('#fname_upd').val(json.username);
+                    $('#dob_upd').val(json.dob);
+                    $('#gender_upd').val(json.gender);
+                    $('#address_upd').val(json.addr);
+                    $('#phnum_upd').val(json.mobile);
+                    $('#email_upd').val(json.email);
+                    $('#workexp_upd').val(json.workexp);
+                    $('#qualif_upd').val(json.qualif);
+                    $('#cid').val(trid);
+                    $('#cand_upd').modal('show');
+                }
+            })
+        });
+
+
+        /* delete button js script
+            $(document).on('click', '.deleteBtn', function(event) {
+              var table = $('#example').DataTable();
+              event.preventDefault();
+              var id = $(this).data('id');
+              if (confirm("Are you sure want to delete this User ? ")) {
+                $.ajax({
+                  url: "delete_user.php",
+                  data: {
+                    id: id
+                  },
+                  type: "post",
+                  success: function(data) {
+                    var json = JSON.parse(data);
+                    status = json.status;
+                    if (status == 'success') {
+                      //table.fnDeleteRow( table.$('#' + id)[0] );
+                      //$("#example tbody").find(id).remove();
+                      //table.row($(this).closest("tr")) .remove();
+                      $("#" + id).closest('tr').remove();
+                    } else {
+                      alert('Failed');
+                      return;
+                    }
+                  }
+                });
+              } else {
+                return null;
+              }
+
+
+
+            })
+            */
+    </script>
     <!-- /.scripts -->
+
+    <!-- modal update -->
+    <div class="modal fade" id="cand_upd" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Candidate Update form: </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container p-5 my-2 border">
+                        <h2>Update your details here:</h2><br>
+                        <form name="candidate_upd" action="candidate_upd_query.php" method="POST">
+
+                            <div class="form-group">
+                                <label for="fname_upd" class="form-label">Full Name: </label>
+                                <input type="text" class="form-control" id="fname_upd" name="fname_upd" required>
+                            </div>
+                            <br>
+
+                            <div class="form-inline">
+                                <label for="dob_upd" class="form-label">Date of Birth: </label>
+                                <div class="col-sm-2">
+                                    <input type="date" class="form-control" id="dob_upd" name="dob_upd" required>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="form-check">
+                                <label for="gender_upd" class="form-label">Gender: </label>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="gender_upd" name="gender_upd" value="Male">Male
+                                    <label class="form-check-label" for="gender_upd"></label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="gender_upd" name="gender_upd" value="Female">Female
+                                    <label class="form-check-label" for="gender_upd"></label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="gender_upd" name="gender_upd" value="Others">Others
+                                    <label class="form-check-label" for="gender_upd"></label>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="address_upd" class="form-label">Address: </label>
+                                <textarea type="text" class="form-control" rows="5" cols="33" id="address_upd" name="address_upd" required></textarea>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="phnum_upd" class="form-label">Phone number: (+91) </label>
+                                <input type="tel" class="form-control" id="phnum_upd" name="phnum_upd" maxlength="10" pattern="[1-9]{1}[0-9]{9}" title="Please enter a valid 10 digits contact number" required>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="email_upd" class="form-label">Email address: </label>
+                                <input type="email" class="form-control" id="email_upd" name="email_upd" aria-describedby="emailHelp" required>
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                            <br>
+
+                            <div class="form-inline">
+                                <label for="workexp_upd" class="form-label">Experience (in years): </label>
+                                <div class="col-sm-2">
+                                    <input type="number" class="form-control" id="workexp_upd" name="workexp_upd" required>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="qualif_upd" class="form-label">Qualifications: </label>
+                                <input type="text" class="form-control" id="qualif_upd" name="qualif_upd" required>
+                            </div>
+                            <br>
+
+                            <input type="hidden" id="cid" name="cid">
+
+                            <button type="submit" class="btn btn-primary" style="float: right;">Submit</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
