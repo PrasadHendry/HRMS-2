@@ -352,6 +352,9 @@ require_once('check_login.php');
                     $('#qualif_upd').val(json.qualif);
                     $('#cid').val(trid);
                     $('#cand_upd').modal('show');
+                },
+                error: function() {
+                    alert('error');
                 }
             })
         });
