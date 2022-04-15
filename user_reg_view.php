@@ -33,12 +33,9 @@ $count = $_GET["c"];
         <?php include 'navbar.php'; ?>
         <!-- /.navbar -->
 
-        <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Sidebar -->
-            <?php include 'sidebar.php' ?>
-            <!-- /.sidebar -->
-        </aside>
+        <!-- Sidebar -->
+        <?php include 'sidebar.php' ?>
+        <!-- /.sidebar -->
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">

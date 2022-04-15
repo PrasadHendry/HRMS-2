@@ -32,21 +32,19 @@ $user_res = $user_res->fetch_assoc();
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-       <!-- Preloader -->
-       <div class="preloader flex-column justify-content-center align-items-center" >
-            <div style="font-size: xx-large;font-weight: bold;">Now Loading...</div>
-        </div>
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <div style="font-size: xx-large;font-weight: bold;">Now Loading...</div>
+    </div>
 
     <!-- Navbar -->
     <?php include 'navbar.php'; ?>
     <!-- /.navbar -->
 
-    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Sidebar -->
-      <?php include 'sidebar.php' ?>
-      <!-- /.sidebar -->
-    </aside>
+    <!-- Sidebar -->
+    <?php include 'sidebar.php' ?>
+    <!-- /.sidebar -->
+
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
