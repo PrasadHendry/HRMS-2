@@ -1,6 +1,6 @@
   <!-- jQuery -->
   <script src="plugins/jquery/jquery.min.js"></script>
-  <!-- Font Awesome -->
+    <!-- Font Awesome -->
   <script defer src="plugins/fontawesome-free/js/all.js"></script>
   <!-- Select2 -->
   <script src="plugins/select2/js/select2.full.min.js"></script>
@@ -45,8 +45,6 @@
   <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
-  <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
