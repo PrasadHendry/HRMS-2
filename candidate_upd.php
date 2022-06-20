@@ -2,7 +2,7 @@
     // function to perform validations
     function checkForm() {
         var fname = document.forms["candidate_upd"]["fname_upd"].value;
-        var age = document.forms["candidate_upd"]["age_upd"].value;
+        var dob = new Date(document.forms["candidate_upd"]["dob_upd"].value);
         var email = document.forms["candidate_upd"]["email_upd"].value;
         var phnum = document.forms["candidate_upd"]["phnum_upd"].value;
 
@@ -11,6 +11,15 @@
             window.alert("Full name is invalid");
             return false;
         } */
+
+        //calculate month difference from current date in time  
+        var month_diff = Date.now() - dob.getTime();
+        //convert the calculated difference in date format
+        var age_dt = new Date(month_diff);
+        //extract year from date
+        var year = age_dt.getUTCFullYear();
+        //now calculate the age of the user
+        var age = Math.abs(year - 1970);
 
         // checking for age, valid age is 18 to 60
         if (!(/^\d{2}$/.test(age)) || age > 60 || age < 18) {
