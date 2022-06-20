@@ -10,6 +10,7 @@ $upd_id = $_POST['eid'];
 
 // stores updated data into the database
 $res = $conn->query("UPDATE employee_phnum SET phnum_home='$phnum_hm', phnum_work='$phnum_wk', phnum_mobile='$phnum_mb' WHERE employee_id='$upd_id'");
+$res = $conn->query("UPDATE candidate_information SET phnum='$phnum_wk' WHERE employee_id='$upd_id'");
 
 // redirects to display employee information after closing connection
 $conn->close();

@@ -24,6 +24,7 @@ else
 {
     // stores updated data into the database
     $res = $conn->query("UPDATE employee_information SET employee_name='$fullname', employee_dob='$dateofbirth', employee_age=TIMESTAMPDIFF(YEAR, '$dateofbirth', CURDATE()), employee_gender='$gender', employee_address='$address', employee_email='$email' WHERE employee_id='$upd_id'");
+    $res = $conn->query("UPDATE candidate_information SET candidate_fullname='$fullname', candidate_dob='$dateofbirth', candidate_age=TIMESTAMPDIFF(YEAR, '$dateofbirth', CURDATE()), candidate_gender='$gender', candidate_address='$address', candidate_email='$email' WHERE employee_id='$upd_id'");
 
     // redirects to display employee information after closing connection
     $conn->close();
