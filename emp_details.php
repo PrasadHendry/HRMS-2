@@ -102,6 +102,12 @@ $count = $_GET["c"];
                         <div class="tab-pane fade <?php if ($count == 0) echo "show active"; ?>" id="details" role="tabpanel" aria-labelledby="details-tab">
                             <?php
 
+                            if (isset($_GET["e"])) {
+                                echo "<div class='alert alert-warning alert-dismissible fade show' style='font-size: large; text-align:center;'>
+                                        <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                                        <strong>Warning! </strong>The date entered is invalid. Age must be between 18 and 60.
+                                    </div>";
+                            }
                             // retrieves all employee information records
                             $result = $conn->query("SELECT * FROM employee_information");
 

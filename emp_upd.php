@@ -6,35 +6,6 @@ $res = $conn->query("select * from employee_phnum where employee_id = $row[emplo
 $res = $res->fetch_assoc();
 ?>
 
-<script>
-    // function to perform validations
-    function checkForm() {
-        var fname = document.forms["emp_upd"]["fname_upd"].value;
-        var age = document.forms["emp_upd"]["age_upd"].value;
-        var email = document.forms["emp_upd"]["email_upd"].value;
-
-        // checking for digits in full name
-        if (!(/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/.test(fname))) {
-            window.alert("Full name is invalid");
-            return false;
-        }
-
-        // checking for age, valid age is 18 to 60
-        if (!(/^\d{2}$/.test(age)) || age > 60 || age < 18) {
-            window.alert("age is invalid");
-            return false;
-        }
-
-        // checking validity of email
-        if (!(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/.test(email))) {
-            window.alert("email is invalid");
-            return false;
-        }
-
-        return true;
-    }
-</script>
-
 <!-- Modal update -->
 <div class="modal fade" id="modal_update<?php echo $row["employee_id"]; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -48,7 +19,7 @@ $res = $res->fetch_assoc();
             <div class="modal-body">
                 <div class="container p-5 my-2 border">
                     <h2>Update your details here:</h2><br>
-                    <form name="emp_upd" onsubmit="return checkForm()" action="emp_upd_query.php" method="POST">
+                    <form name="emp_upd" action="emp_upd_query.php" method="POST">
 
                         <div class="form-group">
                             <label for="fname_upd" class="form-label">Full Name: </label>
