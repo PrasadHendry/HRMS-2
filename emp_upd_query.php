@@ -17,7 +17,7 @@ $age = $diff->format('%y');
 
 if($age > 60 || $age < 18)
 {
-    header("location:emp_details.php?e=1");
+    header("location:emp_details.php?c=0&e=1");
 }
 
 else
