@@ -13,7 +13,7 @@ $qualif = $_POST['qualifications'];
 
 // calculating age from dates
 $today = date("Y-m-d");
-$diff = date_diff(date_create($dateOfBirth), date_create($today));
+$diff = date_diff(date_create($dateofbirth), date_create($today));
 $age = $diff->format('%y');
 
 if($age > 60 || $age < 18)
