@@ -32,3 +32,5 @@
   <link rel="stylesheet" href="plugins/bs-stepper/css/bs-stepper.min.css">
   <!-- dropzonejs -->
   <link rel="stylesheet" href="plugins/dropzone/min/dropzone.min.css">
+    <!-- Parsley.js CSS -->
+    <link rel="stylesheet" href="plugins/Parsley/parsley.css">

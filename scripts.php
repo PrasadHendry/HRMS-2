@@ -49,6 +49,8 @@
   <script src="dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="dist/js/pages/dashboard.js"></script>
+  <!-- Parsley.js (validations) -->
+  <script src="plugins/Parsley/parsley.min.js"></script>
   <!-- Page specific script -->
   <script>
     $(function() {

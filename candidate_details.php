@@ -133,7 +133,7 @@ require_once('check_login.php');
                                 <div class="modal-body">
                                     <div class="container p-5 my-2 border">
                                         <h2>Enter your details here:</h2><br>
-                                        <form name="candidate_info" action="candidate_insert.php" method="POST">
+                                        <form name="candidate_info" action="candidate_insert.php" method="POST" data-parsley-validate>
 
                                             <div class="form-group">
                                                 <label for="fullname" class="form-label">Full Name: </label>
@@ -144,7 +144,7 @@ require_once('check_login.php');
                                             <div class="form-inline">
                                                 <label for="dob" class="form-label">Date of Birth: </label>
                                                 <div class="col-sm-2">
-                                                    <input type="date" class="form-control" id="dob" name="dateofbirth" required>
+                                                    <input type="date" class="form-control" id="dob" name="dateofbirth" data-parsley-error-message="Valid date is required" required>
                                                 </div>
                                             </div>
                                             <br>
@@ -181,7 +181,7 @@ require_once('check_login.php');
 
                                             <div class="form-group">
                                                 <label for="phnum" class="form-label">Phone number: (+91) </label>
-                                                <input type="tel" class="form-control" id="phnum" name="phnumber" maxlength="10" pattern="[1-9]{1}[0-9]{9}" title="Please enter a valid 10 digits contact number" required>
+                                                <input type="tel" class="form-control" id="phnum" name="phnumber" maxlength="10" pattern="[1-9]{1}[0-9]{9}" data-parsley-pattern-message="Please enter a valid 10 digits contact number" required>
                                             </div>
                                             <br>
 
