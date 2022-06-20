@@ -1,48 +1,3 @@
-<script>
-    // function to perform validations
-    function checkForm() {
-        var fname = document.forms["candidate_upd"]["fname_upd"].value;
-        var dob = new Date(document.forms["candidate_upd"]["dob_upd"].value);
-        var email = document.forms["candidate_upd"]["email_upd"].value;
-        var phnum = document.forms["candidate_upd"]["phnum_upd"].value;
-
-        /* // checking for digits in full name
-        if (!(/^[A-Za-z\s]+$/.test(fname))) {
-            window.alert("Full name is invalid");
-            return false;
-        } */
-
-        //calculate month difference from current date in time  
-        var month_diff = Date.now() - dob.getTime();
-        //convert the calculated difference in date format
-        var age_dt = new Date(month_diff);
-        //extract year from date
-        var year = age_dt.getUTCFullYear();
-        //now calculate the age of the user
-        var age = Math.abs(year - 1970);
-
-        // checking for age, valid age is 18 to 60
-        if (!(/^\d{2}$/.test(age)) || age > 60 || age < 18) {
-            window.alert("age is invalid");
-            return false;
-        }
-
-        // checking validity of email
-        if (!(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/.test(email))) {
-            window.alert("email is invalid");
-            return false;
-        }
-
-        // checking for telephone or mobile phone number
-        if (!(/^\d{8,10}$/.test(phnum))) {
-            window.alert("phone number is invalid");
-            return false;
-        }
-
-        return true;
-    }
-</script>
-
 <!-- modal update -->
 <div class="modal fade" id="modal_update<?php echo $row["candidate_id"]; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -56,7 +11,7 @@
             <div class="modal-body">
                 <div class="container p-5 my-2 border">
                     <h2>Update your details here:</h2><br>
-                    <form name="candidate_upd" onsubmit="return checkForm()" action="candidate_upd_query.php" method="POST">
+                    <form name="candidate_upd" action="candidate_upd_query.php" method="POST">
 
                         <div class="form-group">
                             <label for="fname_upd" class="form-label">Full Name: </label>
