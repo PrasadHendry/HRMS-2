@@ -6,7 +6,7 @@ include 'db_conn.php';
 <aside class="main-sidebar main-sidebar-custom sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="index.php" class="brand-link">
-    <img src="dist/img/cosmic.png" alt="Cosmic Solutions Logo" class="brand-image">
+    <img src="dist/img/HRSP_logo.png" alt="HRSP Logo" class="brand-image">
     <span class="brand-text font-weight-light"> HRSP </span>
   </a>
   <div class="sidebar">
